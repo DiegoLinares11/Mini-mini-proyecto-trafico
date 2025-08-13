@@ -95,14 +95,8 @@ int main(int argc, char **argv){
 
         // Como en las slides: actualizar luces y mover vehículos en paralelo
         //Avca hay paralelismo de tareas
-        #pragma omp parallel
-        {
-            #pragma omp single
-            update_traffic_lights(L, num_luces);
-            
-            #pragma omp single  
-            move_vehicles(V, num_autos, L, num_luces, ruta_max);
-        }
+        update_traffic_lights(L, num_luces);  // Ya tiene #pragma omp parallel for adentro
+        move_vehicles(V, num_autos, L, num_luces, ruta_max);  // Ya tiene #pragma omp parallel for adentro
 
 
         // Impresión estilo “Iteración N” (solo primeras 4–5 para no saturar)
